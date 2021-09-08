@@ -38,7 +38,9 @@ const CameraView = () => {
                 const data = await CameraRef.current.takePictureAsync({
                     quality: 0.5,
                     exif: true,
-                    base64: true
+                    base64: true,
+                    width: Dimensions.get("screen").width / 2,
+                    
                 });
                 return resolve(data.base64 as string);
             }
