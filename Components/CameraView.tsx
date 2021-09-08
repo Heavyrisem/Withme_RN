@@ -25,7 +25,7 @@ const CameraView = () => {
             action: () => (Run_AI("caption"))
         },
         {
-            keyWords: ["앞에 있는것좀 읽어줘", "글자좀 읽어줘", "글을 읽어줘", "읽어줘"],
+            keyWords: ["앞에 있는것좀 읽어줘", "글자좀 읽어줘", "글좀 읽어줘", "읽어줘"],
             action: () => (Run_AI("ocr"))
         }], function (str: string) {
             setSTT(str);
@@ -39,7 +39,7 @@ const CameraView = () => {
                     quality: 0.5,
                     exif: true,
                     base64: true,
-                    width: Dimensions.get("screen").width / 2,
+                    width: Dimensions.get("screen").width / 0.8,
                     
                 });
                 return resolve(data.base64 as string);
