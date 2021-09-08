@@ -18,7 +18,9 @@ class VoiceDetection {
         this.EventAdder();
         this.STT.onSpeechError = (e) => {
             console.log("err", e);
-            // this.STT.stop().then(()=>this.STT.start("ko-KR"));
+            if (e.error && e.error.message)
+             this.setResult(e.error.message);
+            this.STT.stop().then(()=>this.STT.start("ko-KR"));
         }
 
         this.WakeUpKeyWord = WakeUpKeyWord;
