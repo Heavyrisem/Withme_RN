@@ -20,7 +20,7 @@ const CameraView = () => {
 
 
     useEffect(() => {
-        VoiceDetec = new VoiceDetection("지수야", [{
+        VoiceDetec = new VoiceDetection("믿음이", [{
             keyWords: ["앞에 뭐가 보여", "뭐가 있어", "뭐가 보여", "뭐가 보이니", "앞에 뭐가 있니", "앞에 뭐가 있는지 설명해줘"],
             action: () => (Run_AI("caption"))
         },
