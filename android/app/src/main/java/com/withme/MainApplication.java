@@ -1,13 +1,12 @@
-package com.withme_rn;
+package com.withme;
 
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import net.no_mad.tts.TextToSpeechPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.zmxv.RNSound.RNSoundPackage;
 import com.wenkesj.voice.VoicePackage;
-import com.github.chadsmith.MicrophoneStream.MicrophoneStreamPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -67,7 +66,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.withme_rn.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.withme.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

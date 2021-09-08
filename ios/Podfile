@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'Withme_RN' do
+target 'Withme' do
   config = use_native_modules!
 
   use_react_native!(
@@ -14,15 +14,13 @@ target 'Withme_RN' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-
-  pod 'react-native-microphone-stream', :path => '../node_modules/react-native-microphone-stream'
-
   pod 'react-native-voice', :path => '../node_modules/@react-native-voice/voice'
 
-  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
 
-  target 'Withme_RNTests' do
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  target 'WithmeTests' do
     inherit! :complete
     # Pods for testing
   end

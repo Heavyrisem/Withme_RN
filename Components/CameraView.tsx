@@ -1,29 +1,42 @@
-import React, { useEffect, useRef } from "react"
-import { Dimensions } from "react-native";
+import React, { useEffect, useRef, useState } from "react"
+import { Dimensions, SafeAreaView, StyleProp, Text, useColorScheme, View, ViewStyle } from "react-native";
 
 import { RNCamera } from "react-native-camera";
-import DeviceInfo from 'react-native-device-info';
-import io from 'socket.io-client';
+import Sound from 'react-native-sound';
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import VoiceDetection from "./VoiceDetection";
 
 const CameraView = () => {
+	const isDarkMode = useColorScheme() === 'dark';
+
+	const DarkModeStyle = {
+		backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+        color: isDarkMode ? Colors.lighter : Colors.darker
+	};
     const CameraRef = useRef<RNCamera>(null);
+    const [STT, setSTT] = useState<string>("음성 인식 결과가 여기에 표시됩니다.");
+    let isRunning = false;
+    let VoiceDetec: VoiceDetection | undefined;
+
 
     useEffect(() => {
-        const UniqueID = DeviceInfo.getUniqueId()
-        const socket = io("https://withme.heavyrisem.xyz", {query: {mobileID: UniqueID}, transports: ['websocket']});
-        socket.on('connect', () => (console.log('socket connected')));
-        socket.on('ImageCapture', async () => {
-            console.log("Capture");
-            socket.emit('ImageCapture', {imageData: await Capture()});
+        VoiceDetec = new VoiceDetection("믿음이", [{
+            keyWords: ["앞에 뭐가 보여", "뭐가 있어", "뭐가 보여", "뭐가 보이니"],
+            action: () => (Run_AI("caption"))
+        },
+        {
+            keyWords: ["앞에 있는것좀 읽어줘", "글자좀 읽어줘", "글을 읽어줘", "읽어줘"],
+            action: () => (Run_AI("ocr"))
+        }], function (str: string) {
+            setSTT(str);
         });
-        socket.on('disconnect', reason => {console.log(reason)});
     }, []);
 
     async function Capture(): Promise<string> {
         return new Promise(async (resolve, reject) => {
             if (CameraRef.current) {
                 const data = await CameraRef.current.takePictureAsync({
-                    quality: 0.8,
+                    quality: 0.5,
                     exif: true,
                     base64: true
                 });
@@ -31,10 +44,66 @@ const CameraView = () => {
             }
         })
     }
+
+    async function Run_AI(type: "caption" | "ocr") {
+        if (isRunning || !VoiceDetec) return;
+        isRunning = true;
+        console.log("Run_AI", type);
+        clearTimeout(VoiceDetec.SpeechTimer);
+        VoiceDetec.STT.stop();
+        
+        const image = await Capture();
+        let timer = Date.now();
+        let voice: {result?: {shortText: string, url: string}[], err?: string} = await (await fetch(`https://withme.heavyrisem.xyz/v2/${type}`, {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                imageData: image
+            })
+        })).json();
+
+        if (voice.result) {
+            console.log("Requset", Date.now() - timer, 'ms');
+            for (const Audio of voice.result) await PlaySound(Audio.url);
+        } else {
+            console.log('err', voice.err);
+        }
+        isRunning = false;
+        VoiceDetec.STT.start("ko-KR");
+    }
+
+    function PlaySound(URL: string): Promise<void> {
+        return new Promise(resolve => {
+            console.log(URL);
+            const sound = new Sound(decodeURI(URL), '', (error) => {
+                if (error) {
+                    console.log('failed to load the sound', error);
+                    return;
+                }
+                // loaded successfully
+                console.log('duration in seconds: ' + sound.getDuration() + 'number of channels: ' + sound.getNumberOfChannels());
+            
+                // Play the sound with an onEnd callback
+                sound.play((success) => {
+                    if (success) {
+                        console.log('successfully finished playing');
+                    } else {
+                        console.log('playback failed due to audio decoding errors');
+                    }
+                    return resolve();
+                });
+            })
+        })
+    }
     
     return (
         <>
-			<RNCamera ref={CameraRef} style={{width: Dimensions.get("screen").width, height: Dimensions.get("screen").height}} type={RNCamera.Constants.Type.back} captureAudio={false}></RNCamera>
+			 <RNCamera ref={CameraRef} style={{width: Dimensions.get("screen").width, height: Dimensions.get("screen").height, alignItems: 'center'}} type={RNCamera.Constants.Type.back} captureAudio={false}></RNCamera>
+             <View style={{position: 'absolute', width: Dimensions.get("screen").width, height: Dimensions.get("screen").height, alignItems: 'center'}}>
+                <View style={{position: 'absolute', bottom: 0, width: Dimensions.get("screen").width * 0.8, padding: "5%", margin: "10%", borderRadius: 100, ...DarkModeStyle}}>
+                    <Text>{STT}</Text>
+                </View>
+            </View>
         </>
     )
 }
