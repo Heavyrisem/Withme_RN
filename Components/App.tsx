@@ -8,7 +8,7 @@
  * @format
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	useColorScheme,
 } from 'react-native';
@@ -17,8 +17,12 @@ import {
 	Colors
 } from 'react-native/Libraries/NewAppScreen';
 import CameraView from './CameraView';
+import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
+	useEffect(() => {
+		SplashScreen.hide();
+	}, []);
 	return (
 			<CameraView />
 	);
