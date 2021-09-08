@@ -57,7 +57,7 @@ class VoiceDetection {
         console.log(e.value, e.value && e.value[0].indexOf(this.WakeUpKeyWord) != -1);
 
         
-        if (e.value && e.value[0].indexOf(this.WakeUpKeyWord) != -1) {
+        if (e.value && e.value[0].indexOf(this.WakeUpKeyWord.toLowerCase()) != -1) {
             let idx = e.value[0].lastIndexOf(this.WakeUpKeyWord);
             let text = e.value[0].substring(idx+this.WakeUpKeyWord.length);
             this.setResult(e.value[0].substring(idx));
