@@ -1,0 +1,6 @@
+module Pods_Withme_WithmeTests {
+  umbrella header "Pods-Withme-WithmeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

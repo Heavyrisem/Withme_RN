@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="191" height="191">
+    <g data-name="텍스트 버튼">
+        <g data-name="패스 107" style="fill:none">
+            <path d="M95.5 0A95.5 95.5 0 1 1 0 95.5 95.5 95.5 0 0 1 95.5 0z" style="stroke:none"/>
+            <path d="M95.5 8C47.252 8 8 47.252 8 95.5S47.252 183 95.5 183 183 143.748 183 95.5 143.748 8 95.5 8m0-8C148.243 0 191 42.757 191 95.5S148.243 191 95.5 191 0 148.243 0 95.5 42.757 0 95.5 0z" style="fill:#fff;stroke:none"/>
+        </g>
+        <text transform="translate(67 141)" style="fill:#fff;stroke:#fff;font-size:113px;font-family:SegoeUI,Segoe UI"><tspan x="0" y="0">T</tspan></text>
+    </g>
+</svg>

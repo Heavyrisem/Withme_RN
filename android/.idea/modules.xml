@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Withme.iml" filepath="$PROJECT_DIR$/.idea/modules/Withme.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1564273097/Withme.@react-native-voice_voice.iml" filepath="$PROJECT_DIR$/.idea/modules/1564273097/Withme.@react-native-voice_voice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Withme.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Withme.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1422455831/Withme.react-native-camera.iml" filepath="$PROJECT_DIR$/.idea/modules/-1422455831/Withme.react-native-camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/540022411/Withme.react-native-sound.iml" filepath="$PROJECT_DIR$/.idea/modules/540022411/Withme.react-native-sound.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/962858254/Withme.react-native-splash-screen.iml" filepath="$PROJECT_DIR$/.idea/modules/962858254/Withme.react-native-splash-screen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-2124907040/Withme.react-native-svg.iml" filepath="$PROJECT_DIR$/.idea/modules/-2124907040/Withme.react-native-svg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1564273097/Withme.react-native-voice_voice.iml" filepath="$PROJECT_DIR$/.idea/modules/1564273097/Withme.react-native-voice_voice.iml" />
+    </modules>
+  </component>
+</project>

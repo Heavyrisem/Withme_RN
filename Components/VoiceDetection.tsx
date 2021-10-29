@@ -14,6 +14,7 @@ class VoiceDetection {
 
     constructor(WakeUpKeyWord: string, Actions: VoiceDetection_Action[], setResult: (str: string) => any) {
         console.log("init");
+        this.STT.isAvailable().then(r => console.log(r));
         this.setResult = setResult;
         this.EventAdder();
         this.STT.onSpeechError = (e) => {
@@ -35,6 +36,7 @@ class VoiceDetection {
     }
 
     stop = async () => {
+        return;
         console.log("음성이 감지되지 않아 초기화합니다.", await this.STT.isRecognizing());
         let isRec = await this.STT.isRecognizing();
         if (isRec) {
