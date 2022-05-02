@@ -39,9 +39,10 @@ const CameraView = () => {
         return new Promise(async (resolve, reject) => {
             if (CameraRef.current) {
                 const data = await CameraRef.current.takePictureAsync({
-                    quality: 0.5,
+                    quality: 1,
                     exif: true,
                     base64: true,
+                    orientation: RNCamera.Constants.Orientation.portrait
                     // width: Dimensions.get("screen").width / 0.8,
                     
                 });
